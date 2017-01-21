@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"> 
+                          
+ 
+	    <var name="mainClass" class="com.handbags.spring.model.MainClass"/>
+        <var name="billingAddress" class="com.handbags.spring.model.BillingAddress"/>
+     	<var name="shippingAddress" class="com.handbags.spring.model.ShippingAddress"/>
+
+<on-start>
+<evaluate expression="cartHandler.initFlow()" result="flowScope.mainClass"></evaluate>
+</on-start>
+
+
+<action-state id="cart">
+		<evaluate expression="userDetailService.getBillingAddressByUserId(externalContext.sessionMap.userId)" result="flowScope.billingAddress"></evaluate>
+		<transition on="success" to="displayBilling" />
+	</action-state>
+	
+	<view-state id="displayBilling" view="displayBilling" model="billingAddress">
+		<transition on="edit" to="addBilling" />
+		<transition on="submit" to="addBilling" />
+	</view-state>
+	
+
+	
+	<view-state id="addBilling" view="BillingAddress" model="billingAddress">
+		<transition on="submit" to="validate" />
+	</view-state>
+	
+	
+	<action-state id="validate">
+		<evaluate expression="cartHandler.validateBillingAddress(billingAddress,messageContext)"></evaluate>
+		<transition on="success" to="startShipping" />
+		<transition on="failure" to="addBilling" />
+	</action-state>
+	
+	
+<action-state id="startShipping">
+		<evaluate expression="userDetailService.getShippingAddressByUserId(externalContext.sessionMap.userId)" result="flowScope.shippingAddress"></evaluate>
+		<transition on="success" to="displayShipping" />
+	</action-state>
+	
+	
+	<view-state id="displayShipping" view="displayShipping" model="shippingAddress">
+	<transition on="edit" to="addShipping" />
+		<transition on="submit" to="addShipping" />
+	</view-state>
+	
+	
+	<view-state id="addShipping" view="ShippingAddress" model="shippingAddress">
+		<transition on="submit" to="validate2" />
+	</view-state>
+	
+	<action-state id="validate2">
+		<evaluate expression="cartHandler.validateShippingAddress( shippingAddress,messageContext)"></evaluate>
+		<transition on="success" to="endShipping" />
+		<transition on="failure" to="addShipping" />
+	</action-state>
+	
+	
+	<view-state id="endShipping" view="payment" >
+
+	</view-state>
+	
+	
+</flow>
+
