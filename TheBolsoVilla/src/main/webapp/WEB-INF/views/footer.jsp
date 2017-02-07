@@ -58,7 +58,7 @@ footer { background-color:#0c1a1e; min-height:350px; font-family: 'Open Sans', s
 
 </style>
 <footer>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-md-4 col-sm-6 footerleft ">
         <div class="logofooter"> The Bolso Villa</div>
@@ -116,7 +116,7 @@ footer { background-color:#0c1a1e; min-height:350px; font-family: 'Open Sans', s
       </ul>
     </div>
   </div>
-</div>
+ 
 </div>
 </body>
 </html>

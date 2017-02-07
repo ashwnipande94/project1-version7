@@ -116,7 +116,7 @@ input[type="password"] {
    
 			
 <div class="offset-sm-2 col-sm-10">
-                  <input type="submit" name="_eventId_submit" value="addUserDetail" class="btn btn-primary"/>
+                  <input type="submit" name="_eventId_submit" value="Submit" class="btn btn-primary"/>
    </div>      			
 
  

@@ -21,7 +21,7 @@
 	
 	<view-state id="displayBilling" view="displayBilling" model="billingAddress">
 		<transition on="edit" to="addBilling" />
-		<transition on="submit" to="addBilling" />
+		<transition on="submit" to="startShipping" />
 	</view-state>
 	
 
@@ -46,7 +46,7 @@
 	
 	<view-state id="displayShipping" view="displayShipping" model="shippingAddress">
 	<transition on="edit" to="addShipping" />
-		<transition on="submit" to="addShipping" />
+		<transition on="submit" to="endShipping" />
 	</view-state>
 	
 	
@@ -62,8 +62,22 @@
 	
 	
 	<view-state id="endShipping" view="payment" >
-
+<transition on="submit" to="thankyou" />
 	</view-state>
+	
+	<view-state id="thankyou" view="Thankyou" >
+		<transition on="submit" to="welcome" />
+	</view-state>
+	
+	 <end-state id="welcome" view="index" />
+	<end-state id="toHome" view="externalRedirect:contextRelative:index.jsp" />
+	<end-state id="toException" view="index" />
+ 
+
+	<global-transitions>
+		<transition on="home" to="toHome" />
+		<transition on="error" to="toException" />
+	</global-transitions>
 	
 	
 </flow>

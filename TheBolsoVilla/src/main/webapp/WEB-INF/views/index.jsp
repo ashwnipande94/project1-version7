@@ -16,7 +16,7 @@
       </div>
       
        <div class="item">
-        <img src="resources/images/handbags.jpg" width="480" height="345">
+        <img src="resources/images/poster1.jpg" width="480" height="345">
       </div>
     
       <div class="item">
@@ -39,8 +39,7 @@
     </a>
   </div>
 
- 
-      <div class="container">
+ <div class="container-fluid">
     <div class="row">
         <div class="row">
             <div class="col-md-9">
@@ -63,7 +62,7 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="row">
-                        <div class="col-sm-3" ng-repeat="p in jsonData">
+                        <div class="col-md-4" ng-repeat="p in jsonData">
                             <div class="col-item">
                             <a href="viewDetail-{{p.productId}}">
                                 <div class="photo">
@@ -88,12 +87,65 @@
                                     </div>
                                     <div class="separator clear-left">
                                         <p class="btn-add">
-                                            <i class="fa fa-shopping-cart"></i><a href="addtocart-{{productdata.productId}}?userId=1" class="hidden-sm">Add to cart</a></p>
+                                            <i class="fa fa-shopping-cart"></i><a href="addtocart-{{p.productId}}?userId=1" class="hidden-sm">Add to cart</a></p>
                                         <p class="btn-details">
                                             <i class="fa fa-list"></i><a href="" class="hidden-sm">More details</a></p>
                                     </div>
                                     <div class="clearfix">
                                     </div></div></div></div></div></div></div></div>
+                                    
+                                    
+<!--                                     slider -->
+                             
+                             
+                             <!-- We will make a simple accordian with hover effects 
+The markup will have a list with images and the titles-->
+<div class="container-fluid">
+<div class="accordian">
+    <ul>
+		<li>
+			<div class="image_title">
+				<a href="#">Men Bags</a>
+			</div>
+			<a href="#">
+				<img src="resources/images/bags2.jpg"/>
+			</a>
+		</li>
+		<li>
+			<div class="image_title">
+				<a href="#">Handbags</a>
+			</div>
+			<a href="#">
+				<img src="resources/images/handbags2.3.jpg"/>
+			</a>
+		</li>
+		<li>
+			<div class="image_title">
+				<a href="#">Wall-E</a>
+			</div>
+			<a href="#">
+				<img src="resources/images/handbags3.4.jpg"/>
+			</a>
+		</li>
+		<li>
+			<div class="image_title">
+				<a href="#">Up</a>
+			</div>
+			<a href="#">
+				<img src="resources/images/handbags2.jpg"/>
+			</a>
+		</li>
+		<li>
+			<div class="image_title">
+				<a href="#">Cars 2</a>
+			</div>
+			<a href="#">
+				<img src="resources/images/handbags3.5.jpg"/>
+			</a>
+		</li>
+	</ul>
+</div>
+          </div>                   
                              
      <script type="text/javascript" src="resources/js/angular.min.js"></script>
     <script type="text/javascript">
@@ -103,9 +155,10 @@
     });
 
   </script>
+  
              
 
-
+</div></div></div>
 
 <%@ include file="footer.jsp" %>
 

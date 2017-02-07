@@ -165,11 +165,16 @@ public class ProductController {
 	 }
 	 
 	 @RequestMapping("ProductDisplay")
-	 public String productDisplay() 
+	 public String productDisplay(Model model) 
 	 {
+		 Gson gson =new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		 String pdt=gson.toJson(productServices.getJsonList());
+		 model.addAttribute("productList", productServices.getJsonList());
+
 		return "ProductDisplay";
 		 
 		 
 	 }
 
+	
 }

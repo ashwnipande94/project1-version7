@@ -108,5 +108,31 @@ public class UserDetailImpl {
 		List<ShippingAddress> ShippingAddressByUserId=session.createQuery(hql).getResultList();
 		return ShippingAddressByUserId.get(0);
 	}
+    
+    
+    
+    public int checkUserName(String username)
+	{
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from UserDetail where username = "+"'"+username+"'";
+		@SuppressWarnings("unchecked")
+		List<UserDetail> userList = session.createQuery(hql).getResultList();
+		int count=userList.size();
+		return count;
+	}
+	
+	public int checkEmail(String emailId)
+	{
+		Session session = sessionFactory.getCurrentSession();
+		String hql="from UserDetail where emailId = "+"'"+emailId+"'";
+		@SuppressWarnings("unchecked")
+		List<UserDetail> emailList = session.createQuery(hql).getResultList();
+		int count = emailList.size();
+		return count;
+	}
+
 
 }
+
+
+

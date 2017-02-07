@@ -84,15 +84,15 @@ input[type="password"] {
   User Name :       <form:input type="text" class="form-control" path="username" placeholder="username" /> 
   					<form:errors path="username"></form:errors><br><br>
  User Password : <form:input type="password" class="form-control" path="password" placeholder="password" />
- 				<form:errors path="username"></form:errors><br><br>
+ 				<form:errors path="password"></form:errors><br><br>
  Fname    :        <form:input type="text" class="form-control" path="fname" placeholder="fname"  />
- 					<form:errors path="username"></form:errors><br><br>
+ 					<form:errors path="fname"></form:errors><br><br>
  Lname   :        <form:input type="text" class="form-control" path="lname" placeholder="lname"  />
- 					<form:errors path="username"></form:errors><br><br>
+ 					<form:errors path="lname"></form:errors><br><br>
  EmailId  :        <form:input type="email" class="form-control" path="emailId" placeholder="emailId"  />
- 					<form:errors path="username"></form:errors><br><br>
+ 					<form:errors path="emailId"></form:errors><br><br>
   Contact No:        <form:input  class="form-control" path="contactNo" placeholder="contactNo"  />
-  					<form:errors path="username"></form:errors><br><br>
+  					<form:errors path="contactNo"></form:errors><br><br>
 
 
    

@@ -1,6 +1,5 @@
 package com.handbags.spring.config;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.binding.mapping.results.Success;
 import org.springframework.binding.message.MessageBuilder;
@@ -35,6 +34,22 @@ public class WebFlowHandler {
 
 	public String validateDetails(UserDetail userDetail,MessageContext messageContext){
 		String status = "success";
+
+		
+		int countUser = userDetailService.checkUserName(userDetail.getUsername());
+		int countEmail = userDetailService.checkEmail(userDetail.getEmailId());
+		
+		if(countUser == 1)
+		{
+			messageContext.addMessage(new MessageBuilder().error().source("username").defaultText("Username is Already Used").build());
+			status="failure";
+		}
+		if(countEmail == 1)
+		{
+			messageContext.addMessage(new MessageBuilder().error().source("emailId").defaultText("Email Id is already Used").build());
+			status="failure";
+		}
+
 		
 		if(userDetail.getUsername().isEmpty()){
 			messageContext.addMessage(new MessageBuilder().error().source("username").defaultText("username cannot be Empty").build());

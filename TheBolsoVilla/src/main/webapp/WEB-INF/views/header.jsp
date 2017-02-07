@@ -3,7 +3,7 @@
      <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
     <%@ page isELIgnored="false" %>
-    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+    <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
     
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,13 +13,16 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css" type="text/css"></link>
 <link href="resources/css/font-awsome.min.css" rel="stylesheet"></link>
-<script src="resources/js/jquery.min.js" type="text/javascript"></script>
+<!-- <script src="resources/js/jquery.min.js" type="text/javascript"></script> -->
  <script src="resources/js/bootstrap.min.js" type="text/javascript"></script>
   <script src="resources/js/angular.min.js" type="text/javascript"></script>
-
+<script src="resources/js/jquery.1.10.2.min.js" type="text/javascript"></script>
+<script src="resources/js/jquery.autocomplete.min.js" type="text/javascript"></script>
 <title>The Bolso Villa</title>
 
 <style> 
+
+
 
  body {
     background-color: #A48E8F;
@@ -208,18 +211,252 @@ body {
 	table#cart tfoot td .btn{display:block;}
 	
 }
-</style>
+
+
+/*Now the styles*/
+* {
+    margin: 0; 
+	padding: 0;
+}
+body {
+	background: #ccc; 
+	font-family: arial, verdana, tahoma;
+}
+
+/*Time to apply widths for accordian to work
+Width of image = 640px
+total images = 5
+so width of hovered image = 640px
+width of un-hovered image = 40px - you can set this to anything
+so total container width = 640 + 40*4 = 800px;
+default width = 800/5 = 160px;
+*/
+
+.accordian {
+	width: 805px; height: 320px;
+	overflow: hidden;
+	
+	/*Time for some styling*/
+	margin: 100px auto;
+	box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.35);
+	-webkit-box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.35);
+	-moz-box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.35);
+}
+
+/*A small hack to prevent flickering on some browsers*/
+.accordian ul {
+	width: 2000px;
+	/*This will give ample space to the last item to move
+	instead of falling down/flickering during hovers.*/
+}
+
+.accordian li {
+	position: relative;
+	display: block;
+	width: 160px;
+	float: left;
+	
+	border-left: 1px solid #888;
+	
+	box-shadow: 0 0 25px 10px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0 0 25px 10px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0 0 25px 10px rgba(0, 0, 0, 0.5);
+	
+	/*Transitions to give animation effect*/
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	/*If you hover on the images now you should be able to 
+	see the basic accordian*/
+}
+
+/*Reduce with of un-hovered elements*/
+.accordian ul:hover li {width: 40px;}
+/*Lets apply hover effects now*/
+/*The LI hover style should override the UL hover style*/
+.accordian ul li:hover {width: 640px;}
+
+
+.accordian li img {
+	display: block;
+}
+
+/*Image title styles*/
+.image_title {
+	background: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	left: 0; bottom: 0;	
+width: 640px;	
+
+}
+.image_title a {
+	display: block;
+	color: #fff;
+	text-decoration: none;
+	padding: 20px;
+	font-size: 16px;
+}
+
+.controls {
+            margin-top: 10px;
+            border: 1px solid transparent;
+            border-radius: 2px 0 0 2px;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            height: 50px;
+            outline: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            width: 100%;
+        }
+
+
+#pac-input {
+            background-color: #fff;
+            font-family: Roboto;
+            font-size: 15px;
+            font-weight: 300;
+            margin-left: 12px;
+            padding: 0 11px 0 13px;
+            text-overflow: ellipsis;
+        }
+
+        #pac-input:focus {
+            border-color: #4d90fe;
+        }
+        
+        
+        
+/*         1 */
+
+
+@import "compass/css3";
+
+/***********************
+ * Essential Structure *
+ ***********************/
+.flexsearch--wrapper {
+	height: auto;
+	width: auto;
+	max-width: 100%;
+	overflow: hidden;
+	background: transparent;
+	margin: 0;
+	position: static;
+}
+	
+.flexsearch--form {
+	overflow: hidden;
+	position: relative;
+}
+	
+.flexsearch--input-wrapper {
+	padding: 0 66px 0 0; /* Right padding for submit button width */
+	overflow: hidden;
+}
+
+.flexsearch--input {
+  width: 100%;
+}
+
+/***********************
+ * Configurable Styles *
+ ***********************/
+.flexsearch {
+  padding: 0 25px 0 200px; /* Padding for other horizontal elements */
+}
+
+.flexsearch--input {
+  -webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+ 	height: 60px;
+  padding: 0 46px 0 10px;
+	border-color: #888;
+  border-radius: 35px; /* (height/2) + border-width */
+  border-style: solid;
+	border-width: 5px;
+  margin-top: 15px;
+  color: #333;
+  font-family: 'Helvetica', sans-serif;
+	font-size: 26px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+	
+.flexsearch--submit {
+  position: absolute;
+	right: 0;
+	top: 0;
+	display: block;
+	width: 60px;
+	height: 60px;
+  padding: 0;
+  border: none;
+	margin-top: 20px; /* margin-top + border-width */
+  margin-right: 5px; /* border-width */
+	background: transparent;
+  color: #888;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 40px;
+  line-height: 60px;
+}
+
+.flexsearch--input:focus {
+  outline: none;
+  border-color: #333;
+}
+
+.flexsearch--input:focus.flexsearch--submit {
+ 	color: #333; 
+}
+
+.flexsearch--submit:hover {
+  color: #333;
+  cursor: pointer;
+}
+
+::-webkit-input-placeholder {
+	color: #888;  
+}
+
+input:-moz-placeholder {
+  color: #888
+}
+
+
+/****************
+ * Pretify demo *
+ ****************/
+.h1 {
+  float: left;
+  margin: 25px;
+  color: #333;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 45px;
+  font-weight: bold;
+  line-height: 45px;
+  text-align: center;
+}
+
+
+.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+.autocomplete-suggestion { padding: 5px 5px; white-space: nowrap; overflow: hidden; font-size:22px}
+.autocomplete-selected { background: #F0F0F0; }
+.autocomplete-suggestions strong { font-weight: bold; color: #3399FF; 
+
+       </style>
 
 <body>
-<sec:authorize access="isAuthenticated()">
- <sec:authentication property="principal.Username"/>
-  Welcome Ashwini
- <a href="<c:url value="/logout"/>">Logout</a>
- </sec:authorize>
+<security:authorize access="isAuthenticated()">Welcome
+ <security:authentication property="principal.Username"/>
+  </security:authorize>
+
+
+ 
 
      
        
-        <div class="container-fluid">
+   <div class="container-fluid">
   <nav class="navbar navbar-inverse">
     <div class="navbar-header">
     	<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
@@ -228,7 +465,8 @@ body {
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="#">The Bolso Villa</a>
+		
+		<img src="resources/images/logo.jpg"  width="50" height="50"><a class="navbar-brand" href="#" >The Bolso Villa</a>
 	</div>
 	
 	<div class="collapse navbar-collapse js-navbar-collapse">
@@ -382,35 +620,66 @@ body {
 <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
  <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Home <span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="">Home <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="category"> Category</a></li>
             <li><a href="Subcategory"> Subcategory</a></li>
             <li><a href="brand">Brand</a></li>
             <li><a href="product">Product</a></li>
             <li><a href="supplier">Supplier</a></li>
+            
+            
+            
+            
           </ul>
         </li>
     </ul>
 </div>
 </li>
+
+
 		</ul>
+		
+	
         <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My account <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="loginpage">Login</a></li>
+            <li> <c:if test="${empty pageContext.request.userPrincipal}">
+                                  <a href="loginpage">Login</a>           </c:if>
+                               <c:if test="${!empty pageContext.request.userPrincipal}">
+                                      <a href="/TheBolsoVilla/logout">Logout</a>
+                               </c:if> </li>
             <li><a href="reg">Registration</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a href="wishList-{{productdata.productId}}?userId=1">Wishlist</a></li>
+             <li><a href="ProductDisplay">Products</a></li>
             <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="contactus">Contact Us</a></li>
           </ul>
         </li>
-        <li><a href="#">My cart (0) items</a></li>
+        <li><a href="AddtoCart">My cart (0) items</a></li>
       </ul>
 	</div><!-- /.nav-collapse -->
-  </nav>
+	
+  
+
+ 
+<div class="flexsearch">
+		<div class="flexsearch--wrapper">
+			<form class="flexsearch--form" action="#" method="post">
+				<div class="flexsearch--input-wrapper">
+					<input class="flexsearch--input" type="search" id="w-input-search" placeholder="What are you looking for?">
+				</div>
+				<input class="flexsearch--submit" type="submit" id="button-id" value="&#10140;"/>
+			</form>
+		</div>
 </div>
+	
+ 
+
+</nav>
+</div>
+
 
 <script>
 
@@ -427,6 +696,35 @@ $(document).ready(function(){
     );
 });
 
+
+
+	$(document).ready(function() {
+
+	$('#w-input-search').autocomplete({
+			serviceUrl: '${pageContext.request.contextPath}/getproducts',
+			paramName: "productName",
+			delimiter: ",",
+		   transformResult: function(response) {
+
+			return {
+			  //must convert json to javascript object before process
+			  suggestions: $.map($.parseJSON(response), function(item) {
+
+			      return { value: item.productName, data: item.productId };
+			   })
+
+			 };
+
+	            }
+
+		 });
+
+	  });
+
+
+	
+ 
+   
 </script>
        
        

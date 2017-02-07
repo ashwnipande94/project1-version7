@@ -60,5 +60,16 @@ public class UserDetailService {
 		
 	}
 	
+	public int checkUserName(String username)
+	{
+		return userDetailImpl.checkUserName(username);
+	}
+	
+	public int checkEmail(String emailId)
+	{
+		return userDetailImpl.checkEmail(emailId);
+	}
+
+	
 	
 }

@@ -49,7 +49,7 @@ public class UserDetailController {
 		userDetail.setShippingAddress(shippingAddress);
 		userDetail.setBillingAddress(billingAddress);
 		model.addAttribute("userDetail", userDetail);
-		return "Registration";
+		return "reg";
 	}
 	
 ////	@RequestMapping("/addUserDetail")
@@ -59,5 +59,10 @@ public class UserDetailController {
 ////	}
 ////	
 ////	
+	@RequestMapping("/contactus")
+	public String ContactUs(){
+		
+		return "ContactUs";
+	}	
 //
 }
